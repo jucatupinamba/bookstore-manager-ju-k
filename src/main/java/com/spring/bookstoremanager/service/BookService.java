@@ -24,7 +24,7 @@ public class BookService {
                 .chapters(bookDTO.getChapters())
                 .build();
 
-        Book savedBook = bookRepository.save(bookDTO);
+        Book savedBook = bookRepository.save(bookToSave);
         return MessageResponseDTO.builder()
                 .message("Book created with ID " + savedBook.getId())
                 .build();
