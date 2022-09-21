@@ -2,7 +2,6 @@ package com.spring.bookstoremanager.service;
 
 import com.spring.bookstoremanager.dto.BookDTO;
 import com.spring.bookstoremanager.dto.MessageResponseDTO;
-import com.spring.bookstoremanager.entity.Author;
 import com.spring.bookstoremanager.entity.Book;
 import com.spring.bookstoremanager.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
