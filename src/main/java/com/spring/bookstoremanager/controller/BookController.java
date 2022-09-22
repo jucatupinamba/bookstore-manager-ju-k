@@ -2,14 +2,14 @@ package com.spring.bookstoremanager.controller;
 
 import com.spring.bookstoremanager.dto.BookDTO;
 import com.spring.bookstoremanager.dto.MessageResponseDTO;
+import com.spring.bookstoremanager.entity.Book;
 import com.spring.bookstoremanager.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/books")
@@ -21,6 +21,12 @@ public class BookController {
     @PostMapping
     public MessageResponseDTO create(@RequestBody @Valid BookDTO bookDTO) {
         return bookService.create(bookDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Book>> allBooks(@RequestBody Book book){
+        List<Book> allboks = bookService.findAll(book);
+        return ResponseEntity.ok(allboks);
     }
 
 }

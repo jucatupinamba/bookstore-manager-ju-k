@@ -7,6 +7,8 @@ import com.spring.bookstoremanager.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookService {
     @Autowired
@@ -29,5 +31,10 @@ public class BookService {
         return MessageResponseDTO.builder()
                 .message("Book created with ID " + savedBook.getId())
                 .build();
+    }
+
+    public List<Book> findAll(Book book) {
+        List<Book> allBooks = bookRepository.findAll();
+        return allBooks;
     }
 }
