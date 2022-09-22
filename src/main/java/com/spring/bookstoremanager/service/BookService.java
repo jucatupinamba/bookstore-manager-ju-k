@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -36,5 +37,14 @@ public class BookService {
     public List<Book> findAll(Book book) {
         List<Book> allBooks = bookRepository.findAll();
         return allBooks;
+    }
+
+    public Book findById(Long id) {
+        Optional<Book> obj = bookRepository.findById(id);
+        return obj.orElse(null);
+    }
+
+    public Book save(Book bookId) {
+        return bookRepository.save(bookId);
     }
 }

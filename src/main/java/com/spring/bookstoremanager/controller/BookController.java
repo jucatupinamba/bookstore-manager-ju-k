@@ -4,6 +4,7 @@ import com.spring.bookstoremanager.dto.BookDTO;
 import com.spring.bookstoremanager.dto.MessageResponseDTO;
 import com.spring.bookstoremanager.entity.Book;
 import com.spring.bookstoremanager.service.BookService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,6 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-
     @PostMapping
     public MessageResponseDTO create(@RequestBody @Valid BookDTO bookDTO) {
         return bookService.create(bookDTO);
@@ -27,6 +27,17 @@ public class BookController {
     public ResponseEntity<List<Book>> allBooks(@RequestBody Book book){
         List<Book> allboks = bookService.findAll(book);
         return ResponseEntity.ok(allboks);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book){
+        Book bookId = bookService.findById(id);
+        if(bookId == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        BeanUtils.copyProperties(book, bookId, "id");
+        return ResponseEntity.ok(bookService.save(bookId));
     }
 
 }
